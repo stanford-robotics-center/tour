@@ -57,10 +57,20 @@
     }
     
     .logo {
-      width: 50px;
+      width: 3rem;
       height: auto;
-      margin-bottom: 0.125rem; /* 2px */
     }
+
+    @media screen and (min-width: 768px) {
+      .logo {
+        width: 4rem;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .logo {
+        width: 5rem;
+      }
   
     .audio-section {
       text-align: center;
