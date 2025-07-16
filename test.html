@@ -12,7 +12,7 @@
     gtag('config', 'G-P6XTPT00EE');
   </script>
   
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" type="image/x-icon" href="favicon.ico?format=100w"/>
   <title>Stanford Robotics Center Self-Guided Audio Tour</title>
@@ -22,6 +22,10 @@
       --link-hover: #004499;
     }
   
+    html {
+      font-size: 16px; /* base font size */
+    }
+
     html, body {
       margin: 0;
       padding: 0;
@@ -32,10 +36,10 @@
     
     header {
       background-color: #f4f4f4;
-      padding: 7px 0;
+      padding: 0.4375rem 0; /* 7px = 0.4375rem */
       text-align: center;
       font-family: 'Montserrat', Arial, sans-serif;
-      font-size: 16px;
+      font-size: 1rem; /* 16px */
       color: #333;
       border-bottom: 1px solid #ccc;
     }
@@ -43,29 +47,29 @@
     .logo {
       width: 50px;
       height: auto;
-      margin-bottom: 2px;
+      margin-bottom: 0.125rem; /* 2px */
     }
   
     .audio-section {
       text-align: center;
-      padding: 10px 20px;
+      padding: 0.625rem 1.25rem; /* 10px 20px */
     }
   
     #currentTrackLabel {
-      font-size: 12px;
+      font-size: 0.75rem; /* 12px */
       color: var(--link-color);
-      margin-bottom: 16px;
+      margin-bottom: 1rem; /* 16px */
     }
   
     .audio-links {
-      font-size: 13px;
-      margin-bottom: 16px;
+      font-size: 0.8125rem; /* 13px */
+      margin-bottom: 1rem; /* 16px */
     }
   
     .audio-links a {
       text-decoration: underline;
       color: var(--link-color);
-      margin: 0 5px;
+      margin: 0 0.3125rem; /* 5px */
     }
   
     .audio-links a:hover {
@@ -78,39 +82,43 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 0.625rem; /* 10px */
     }
   
     .button-group {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 0.5rem; /* 8px */
     }
   
     .button-group button {
-      font-size: 12px;
-      padding: 4px 8px;
+      font-size: 0.75rem; /* 12px */
+      padding: 0.25rem 0.5rem; /* 4px 8px */
       cursor: pointer;
     }
 
     #progressBar {
-      width: 160px;
-      margin-bottom: 12px;
+      width: 10rem; /* 160px */
+      margin-bottom: 0.75rem; /* 12px */
     }
 
     .guestbook-link {
-      font-size: 11px;
+      font-size: 0.6875rem; /* 11px */
       font-style: italic;
       color: #666666; /* Soft gray */
       background: none;
       border: none;
-      padding: 2px 4px;
+      padding: 0.125rem 0.25rem; /* 2px 4px */
       text-decoration: underline;
     }
     
     .guestbook-link:hover {
       color: #444444;
       text-decoration: underline;
+    }
+
+    .chatbot-note {
+      font-size: 0.5625rem; /* 9px */
     }
 
     elevenlabs-convai {
@@ -128,7 +136,7 @@
     <p></p>
     Self-Guided Audio Tour
     <p></p>
-    <p style="font-size:9px;">
+    <p class="chatbot-note">
     Go more in depth on your tour by asking questions of the SRC chatbot. Examples: <em>What is soft robotics? What are ToddlerBots?</em>
     </p>
   </header>
