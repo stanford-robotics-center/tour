@@ -189,6 +189,10 @@
           <a href="#" onclick="setAudio('logisticsmanufacturing.mp3', 'Logistics and Manufacturing Bay'); return false;">Logistics and Manufacturing Bay</a>
       </div>
 
+    <div id="audioText" style="padding: 1rem; border-top: 1px solid #ccc; margin-top: 1rem; font-size: 0.875rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <!-- Loaded text for the current stop will appear here -->
+    </div>
+
       <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
     
   </section>
@@ -286,12 +290,26 @@
       audioPlayer.currentTime = progressBar.value;
     });
     
-    // Update track label
-    function setAudio(src, label = '') {
+    // Update audio source, audio text, and track label; start audio play
+    async function setAudio(src, label = '') {
       audioPlayer.src = src;
       audioPlayer.play();
-      currentTrackLabel.innerHTML = `${label}`;
-    }    
+      currentTrackLabel.innerHTML = label;
+    
+      const audioTextDiv = document.getElementById('audioText');
+      const textFileName = src.replace('.mp3', '.html'); 
+    
+      try {
+        const response = await fetch(`texts/${textFileName}`);
+        if (!response.ok) throw new Error('Text not found');
+        const text = await response.text();
+        audioTextDiv.innerHTML = text;
+      } catch (err) {
+        audioTextDiv.innerHTML = '<p><em>Text unavailable for this stop.</em></p>';
+        console.warn(err);
+      }
+    }
+    
   </script>
   
 </body>
