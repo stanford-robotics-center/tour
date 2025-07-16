@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>Stanford Robotics Center</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+      }
+
+      /* Audio Player Styles */
+      #customAudioPlayer {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        z-index: 9999;
+        font-family: sans-serif;
+      }
+
+      #customAudioPlayer .controls {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+
+      #customAudioPlayer button,
+      #customAudioPlayer select {
+        background: #444;
+        color: white;
+        border: none;
+        padding: 5px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      #customAudioPlayer button:hover,
+      #customAudioPlayer select:hover {
+        background: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="https://images.squarespace-cdn.com/content/v1/66b6b61fc5e5030973bd431f/55464576-459e-42b6-a2e0-3066fd79df7c/Packard+5.jpg" alt="Packard Engineering Building image">  
+
+    <!-- AUDIO PLAYER -->
+    <div id="customAudioPlayer">
+      <audio id="audioPlayer" src="welcome.mp3"></audio>
+      <div class="controls">
+        <button onclick="playAudio()">▶</button>
+        <button onclick="pauseAudio()">⏸</button>
+        <button onclick="stopAudio()">⏹</button>
+        <button onclick="rewindAudio()">⏪</button>
+        <button onclick="fastForwardAudio()">⏩</button>
+        <select onchange="changeSpeed(this.value)">
+          <option value="0.5">0.5x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ElevenLabs Widget -->
+     <elevenlabs-convai agent-id="agent_01jvmrp4agffkrp90dfr532sv3"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+    <!-- AUDIO PLAYER JS -->
+    <script>
+      const audio = document.getElementById('audioPlayer');
+
+      function playAudio() {
+        audio.play();
+      }
+
+      function pauseAudio() {
+        audio.pause();
+      }
+
+      function stopAudio() {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+
+      function rewindAudio() {
+        audio.currentTime = Math.max(0, audio.currentTime - 5);
+      }
+
+      function fastForwardAudio() {
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+      }
+
+      function changeSpeed(speed) {
+        audio.playbackRate = parseFloat(speed);
+      }
+    </script>
+  </body>
+</html>
+
+
