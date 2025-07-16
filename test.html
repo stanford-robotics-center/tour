@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P6XTPT00EE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-  
     gtag('config', 'G-P6XTPT00EE');
   </script>
-  
-    <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/x-icon" href="favicon.ico?format=100w"/>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?format=100w" />
   <title>Stanford Robotics Center Self-Guided Audio Tour</title>
+
   <style>
     :root {
       --link-color: #0066cc;
       --link-hover: #004499;
     }
-  
+
     html {
-      font-size: 16px; /* base font size */
+      font-size: 16px;
     }
 
     @media screen and (min-width: 768px) {
       html {
-        font-size: 18px; /* Tablet/Desktop: bump size */
+        font-size: 18px;
       }
     }
 
     @media screen and (min-width: 1024px) {
       html {
-        font-size: 24px; /* Larger desktop */
+        font-size: 24px;
       }
     }
 
@@ -45,17 +44,16 @@
       height: 100%;
       box-sizing: border-box;
     }
-    
+
     header {
       background-color: #f4f4f4;
-      padding: 0.4375rem 0; /* 7px = 0.4375rem */
+      padding: 0.4375rem 0;
       text-align: center;
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-size: 1rem; /* 16px */
+      font-size: 1rem;
       color: #333;
       border-bottom: 1px solid #ccc;
     }
-    
+
     .logo {
       width: 3rem;
       height: auto;
@@ -71,76 +69,75 @@
       .logo {
         width: 5rem;
       }
-  
+    }
+
     .audio-section {
       text-align: center;
-      padding: 0.625rem 1.25rem; /* 10px 20px */
+      padding: 0.625rem 1.25rem;
     }
-  
+
     #currentTrackLabel {
-      font-size: 0.75rem; /* 12px */
+      font-size: 0.75rem;
       color: var(--link-color);
-      margin-bottom: 1rem; /* 16px */
+      margin-bottom: 1rem;
     }
-  
+
     .audio-links {
-      font-size: 0.8125rem; /* 13px */
-      margin-bottom: 1rem; /* 16px */
+      font-size: 0.8125rem;
+      margin-bottom: 1rem;
     }
-  
+
     .audio-links a {
       text-decoration: underline;
       color: var(--link-color);
-      margin: 0 0.3125rem; /* 5px */
+      margin: 0 0.3125rem;
     }
-  
+
     .audio-links a:hover {
       color: var(--link-hover);
       text-decoration: none;
-      margin-top: 0;
     }
-  
+
     .audio-controls {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.625rem; /* 10px */
+      gap: 0.625rem;
     }
-  
+
     .button-group {
       display: flex;
       justify-content: center;
-      gap: 0.5rem; /* 8px */
+      gap: 0.5rem;
     }
-  
+
     .button-group button {
-      font-size: 0.75rem; /* 12px */
-      padding: 0.25rem 0.5rem; /* 4px 8px */
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
       cursor: pointer;
     }
 
     #progressBar {
-      width: 10rem; /* 160px */
-      margin-bottom: 0.75rem; /* 12px */
+      width: 10rem;
+      margin-bottom: 0.75rem;
     }
 
     .guestbook-link {
-      font-size: 0.6875rem; /* 11px */
+      font-size: 0.6875rem;
       font-style: italic;
-      color: #666666; /* Soft gray */
+      color: #666666;
       background: none;
       border: none;
-      padding: 0.125rem 0.25rem; /* 2px 4px */
-      text-decoration: underline;
-    }
-    
-    .guestbook-link:hover {
-      color: #444444;
+      padding: 0.125rem 0.25rem;
       text-decoration: underline;
     }
 
+    .guestbook-link:hover {
+      color: #444444;
+    }
+
     .chatbot-note {
-      font-size: 0.75rem; /* 9px */
+      font-size: 0.75rem;
     }
 
     elevenlabs-convai {
@@ -151,6 +148,7 @@
     }
   </style>
 </head>
+
 
 <body>
   <header>
