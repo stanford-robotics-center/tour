@@ -122,6 +122,25 @@
       margin-bottom: 0.75rem;
     }
 
+    #audioText {
+      opacity: 0;
+      display: none;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+      background: #fafafa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 1rem auto 0 auto;
+    }
+    
+    #audioText.show {
+      display: block;
+      opacity: 1;
+    }
+    
     .guestbook-link {
       font-size: 0.6875rem;
       font-style: italic;
@@ -277,6 +296,7 @@
     function stopAudio() {
       audioPlayer.pause();
       audioPlayer.currentTime = 0;
+      document.getElementById('audioText').classList.remove('show');
     }
   
     // Update progress bar
@@ -297,18 +317,22 @@
       currentTrackLabel.innerHTML = label;
     
       const audioTextDiv = document.getElementById('audioText');
-      const textFileName = src.replace('.mp3', '.html'); 
+      const textFileName = src.replace('.mp3', '.html');
     
       try {
         const response = await fetch(`${textFileName}`);
         if (!response.ok) throw new Error('Text not found');
         const text = await response.text();
         audioTextDiv.innerHTML = text;
+    
+        // Show the text area
+        audioTextDiv.classList.add('show');
       } catch (err) {
         audioTextDiv.innerHTML = '<p><em>Text unavailable for this stop.</em></p>';
-        console.warn(err);
+        audioTextDiv.classList.add('show');
       }
-    }
+    }      
+    
     
   </script>
   
