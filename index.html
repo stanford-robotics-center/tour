@@ -103,6 +103,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.625rem;
+      font-size: 0.9rem;
     }
 
     .button-group {
@@ -117,6 +118,61 @@
       cursor: pointer;
     }
 
+    .control-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: #fafafa;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-family: inherit;
+      color: inherit;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: none;
+      line-height: 1;
+      width: 2.5rem;
+      height: 2rem;
+      text-align: center;
+    }
+
+    .control-button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .control-button:active {
+      background-color: #e6e6e6;
+    }
+
+    .speed-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.25rem;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.15);
+      display: none;
+      z-index: 10;
+      min-width: 4rem;
+    }
+
+    .speed-dropdown button {
+      width: 100%;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+    }
+
     #progressBar {
       width: 10rem;
       margin-bottom: 0.75rem;
@@ -128,14 +184,29 @@
       max-height: 0;
       overflow: hidden;
       transition: opacity 0.4s ease, max-height 0.4s ease;
+      padding: 1rem;
+      padding-bottom: 5rem; /* 👈 ADD THIS */
+      background: #fafafa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 1rem auto 0 auto;
     }
-    
+
+    @media screen and (max-width: 600px) {
+      #audioText {
+        padding-bottom: 6rem; /* ✅ More room for floating chatbot button */
+      }
+    }
+
     #audioText.show {
       opacity: 1;
       visibility: visible;
       max-height: 2000px; /* enough room for your longest text */
     }
-    
+
     .guestbook-link {
       font-size: 0.6875rem;
       font-style: italic;
@@ -155,62 +226,74 @@
     }
 
     elevenlabs-convai {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
+      position: fixed !important;
+      bottom: 1.25rem !important;
+      right: 1.25rem !important;
+      z-index: 1000 !important;
     }
   </style>
 </head>
 
-
 <body>
   <header>
-    <img src="fullsrclogo.png" alt="SRC Logo" class="logo">
+    <img src="fullsrclogo.png" alt="SRC Logo" class="logo" />
     <p></p>
     Self-Guided Audio Tour
     <p></p>
     <p class="chatbot-note">
-    Go more in depth on your tour by asking questions of the SRC chatbot. Examples: <em>What is soft robotics? What are ToddlerBots?</em>
+      Go more in depth on your tour by asking questions of the SRC chatbot. Examples: <em>What is soft robotics? What are ToddlerBots?</em>
     </p>
   </header>
-  
 
   <section class="audio-section">
-      <div id="currentTrackLabel">Introduction</div>
-      <div class="audio-controls">
-        <audio id="audioPlayer" preload="auto">
-        <source src="welcome.mp3" type="audio/mpeg">
+    <div id="currentTrackLabel">Introduction</div>
+    <div class="audio-controls">
+      <audio id="audioPlayer" preload="auto">
+        <source src="welcome.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
-        </audio>
-        <div class="button-group">
-            <button onclick="playAudio()">▶</button>
-            <button onclick="pauseAudio()">⏸</button>
-            <button onclick="stopAudio()">⏹</button>
-        </div>
-      <input type="range" id="progressBar" value="0" min="0" step="1">
-      </div>
-  
-      <div class="audio-links">
-          <a href="#" onclick="setAudio('welcome.mp3', 'Introduction'); return false;">Introduction</a> |
-          <a href="#" onclick="setAudio('oceanonek.mp3', 'Ocean One<sup>K</sup>'); return false;">Ocean One<sup>K</sup></a> |
-          <a href="#" onclick="setAudio('dancestudio.mp3', 'Dance Studio'); return false;">Dance Studio</a> |
-          <a href="#" onclick="setAudio('domesticsuite.mp3', 'Domestic Suite'); return false;">Domestic Suite</a> |
-          <a href="#" onclick="setAudio('interactivehapticdevice.mp3', 'Interactive Haptic Demo'); return false;">Interactive Haptic Demo</a> | 
-          <a href="#" onclick="setAudio('kitchen.mp3', 'Kitchen'); return false;">Kitchen</a> |
-          <a href="#" onclick="setAudio('medicalbay.mp3', 'Medical Bay'); return false;">Medical Bay</a> |
-          <a href="#" onclick="setAudio('fieldrobotics.mp3', 'Field and Construction Bay'); return false;">Field and Construction Bay</a> |
-          <a href="#" onclick="setAudio('logisticsmanufacturing.mp3', 'Logistics and Manufacturing Bay'); return false;">Logistics and Manufacturing Bay</a>
-      </div>
+      </audio>
+      <div class="button-group">
+        <button class="control-button" onclick="playAudio()">▶</button>
+        <button class="control-button" onclick="pauseAudio()">⏸</button>
+        <button class="control-button" onclick="stopAudio()">⏹</button>
 
-    <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
-    
-    <div id="audioText" style="padding: 1rem; border-top: 1px solid #ccc; margin-top: 1rem; font-size: 0.875rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-    <!-- Loaded text for the current stop will appear here -->
+        <div id="speedControlWrapper" style="position: relative;">
+          <button id="speedButton" class="control-button" onclick="toggleSpeedMenu()">
+            1<sup style="font-size: 0.6em; vertical-align: middle; margin-left: 0.1rem;">x</sup> ▼
+          </button>
+          <div id="speedMenu" class="speed-dropdown">
+            <button onclick="setSpeed(0.75)">0.75×</button>
+            <button onclick="setSpeed(1)">1×</button>
+            <button onclick="setSpeed(1.25)">1.25×</button>
+            <button onclick="setSpeed(1.5)">1.5×</button>
+            <button onclick="setSpeed(2)">2×</button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <input type="range" id="progressBar" value="0" min="0" step="1" />
 
-    
+    <div class="audio-links">
+      <a href="#" onclick="setAudio('welcome.mp3', 'Introduction'); return false;">Introduction</a> |
+      <a href="#" onclick="setAudio('oceanonek.mp3', 'Ocean One<sup>K</sup>'); return false;">Ocean One<sup>K</sup></a> |
+      <a href="#" onclick="setAudio('dancestudio.mp3', 'Dance Studio'); return false;">Dance Studio</a> |
+      <a href="#" onclick="setAudio('domesticsuite.mp3', 'Domestic Suite'); return false;">Domestic Suite</a> |
+      <a href="#" onclick="setAudio('interactivehapticdevice.mp3', 'Interactive Haptic Demo'); return false;">Interactive Haptic Demo</a> |
+      <a href="#" onclick="setAudio('kitchen.mp3', 'Kitchen'); return false;">Kitchen</a> |
+      <a href="#" onclick="setAudio('medicalbay.mp3', 'Medical Bay'); return false;">Medical Bay</a> |
+      <a href="#" onclick="setAudio('fieldrobotics.mp3', 'Field and Construction Bay'); return false;">Field and Construction Bay</a> |
+      <a href="#" onclick="setAudio('logisticsmanufacturing.mp3', 'Logistics and Manufacturing Bay'); return false;">Logistics and Manufacturing Bay</a>
+    </div>
+
+    <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
+
+    <div
+      id="audioText"
+      style="padding: 1rem; border-top: 1px solid #ccc; margin-top: 1rem; font-size: 0.875rem; max-width: 600px; margin-left: auto; margin-right: auto;"
+    >
+      <!-- Loaded text for the current stop will appear here -->
+    </div>
   </section>
 
   <footer>
@@ -223,26 +306,26 @@
     const pollInterval = 500; // ms
     const maxAttempts = 120; // try for 1 minute
     let attempts = 0;
-    
+
     const pollForButton = setInterval(() => {
       console.log(`[DEBUG] Attempt ${attempts + 1}: Polling...`);
-    
+
       const host = document.querySelector('elevenlabs-convai');
       if (!host) {
         console.log(`[DEBUG] Attempt ${attempts + 1}: Shadow host not found`);
         if (++attempts >= maxAttempts) clearInterval(pollForButton);
         return;
       }
-    
+
       const shadow = host.shadowRoot;
       console.log(`[DEBUG] Shadow root:`, shadow); // << Log shadow root access
-    
+
       if (!shadow) {
         console.log(`[DEBUG] Attempt ${attempts + 1}: Shadow root not found (possibly closed)`);
         if (++attempts >= maxAttempts) clearInterval(pollForButton);
         return;
       }
-    
+
       // Try several selectors in case structure changed
       const button =
         shadow.querySelector('button[title="Ask me a question"]') ||
@@ -250,27 +333,26 @@
         [...shadow.querySelectorAll('button')].find(btn =>
           btn.textContent.includes('Ask me')
         );
-    
+
       if (!button) {
         console.log(`[DEBUG] Attempt ${attempts + 1}: Button not found`);
         if (++attempts >= maxAttempts) clearInterval(pollForButton);
         return;
       }
-    
+
       console.log('✅ Button found, attaching listener...');
-    
+
       button.addEventListener('click', () => {
         console.log('✅ Shadow button clicked!');
         const audioPlayer = document.getElementById('audioPlayer');
         pauseBackupAudio(); // or audioPlayer.pause();
       });
-    
+
       console.log('✅ Listener successfully attached to button.');
       clearInterval(pollForButton);
     }, pollInterval);
   </script>
 
-  
   <!-- User audio control-->
   <script>
     const audioPlayer = document.getElementById('audioPlayer');
@@ -286,7 +368,7 @@
     }
 
     function pauseBackupAudio() {
-      audioPlayer.currentTime = audioPlayer.currentTime - 1
+      audioPlayer.currentTime = audioPlayer.currentTime - 1;
       audioPlayer.pause();
     }
 
@@ -295,43 +377,60 @@
       audioPlayer.currentTime = 0;
       document.getElementById('audioText').classList.remove('show');
     }
-  
+
+    const speedButton = document.getElementById('speedButton');
+    const speedMenu = document.getElementById('speedMenu');
+
+    function toggleSpeedMenu() {
+      speedMenu.style.display = speedMenu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function setSpeed(speed) {
+      audioPlayer.playbackRate = speed;
+      speedButton.innerHTML = speed + '<sup style="font-size: 0.6em; vertical-align: middle; margin-left: 0.1rem;">x</sup> ▼';
+      speedMenu.style.display = 'none';
+    }
+
+    // Close speed menu if clicking outside
+    document.addEventListener('click', e => {
+      if (!speedButton.contains(e.target) && !speedMenu.contains(e.target)) {
+        speedMenu.style.display = 'none';
+      }
+    });
+
     // Update progress bar
     audioPlayer.addEventListener('timeupdate', () => {
       progressBar.max = Math.floor(audioPlayer.duration);
       progressBar.value = Math.floor(audioPlayer.currentTime);
     });
-    
+
     // Seek on progress bar input
     progressBar.addEventListener('input', () => {
       audioPlayer.currentTime = progressBar.value;
     });
-    
+
     // Update audio source, audio text, and track label; start audio play
     async function setAudio(src, label = '') {
       audioPlayer.src = src;
       audioPlayer.play();
       currentTrackLabel.innerHTML = label;
-    
+
       const audioTextDiv = document.getElementById('audioText');
       const textFileName = src.replace('.mp3', '.html');
-    
+
       try {
         const response = await fetch(`${textFileName}`);
         if (!response.ok) throw new Error('Text not found');
         const text = await response.text();
         audioTextDiv.innerHTML = text;
-    
+
         // Show the text area
         audioTextDiv.classList.add('show');
       } catch (err) {
         audioTextDiv.innerHTML = '<p><em>Text unavailable for this stop.</em></p>';
         audioTextDiv.classList.add('show');
       }
-    }      
-    
-    
+    }
   </script>
-  
 </body>
 </html>
