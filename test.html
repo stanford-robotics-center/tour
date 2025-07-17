@@ -124,21 +124,16 @@
 
     #audioText {
       opacity: 0;
-      display: none;
-      transition: opacity 0.3s ease;
-      padding: 1rem;
-      background: #fafafa;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      max-width: 700px;
-      margin: 1rem auto 0 auto;
+      visibility: hidden;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
     }
     
     #audioText.show {
-      display: block;
       opacity: 1;
+      visibility: visible;
+      max-height: 2000px; /* enough room for your longest text */
     }
     
     .guestbook-link {
