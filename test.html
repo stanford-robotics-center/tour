@@ -103,6 +103,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.625rem;
+      font-size: 0.9rem;
     }
 
     .button-group {
@@ -204,18 +205,21 @@
             <button onclick="stopAudio()">⏹</button>
         </div>
       <input type="range" id="progressBar" value="0" min="0" step="1">
+        
+      <!-- Speed control button and menu -->
+      <div id="speedControlWrapper" style="position: relative; display: inline-block; margin-left: 0.5rem; font-size: 0.875rem; user-select: none;">
+        <div id="speedButton" style="cursor: pointer; padding: 0.25rem 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; background: #fafafa; display: inline-flex; align-items: center;" onclick="toggleSpeedMenu()">
+      1<sup style="font-size: 0.6em; vertical-align: middle; margin-left: 0.1rem;">x</sup> ▼
+        </div>
+        <div id="speedMenu" style="position: absolute; top: 100%; left: 0; margin-top: 0.25rem; background: white; border: 1px solid #ccc; border-radius: 0.25rem; box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.15); display: none; z-index: 10; min-width: 4rem;">
+          <button onclick="setSpeed(0.75)" style="width: 100%; padding: 0.25rem 0.5rem; font-size: 0.875rem; border: none; background: none; cursor: pointer; text-align: left;">0.75×</button>
+          <button onclick="setSpeed(1)" style="width: 100%; padding: 0.25rem 0.5rem; font-size: 0.875rem; border: none; background: none; cursor: pointer; text-align: left;">1×</button>
+          <button onclick="setSpeed(1.25)" style="width: 100%; padding: 0.25rem 0.5rem; font-size: 0.875rem; border: none; background: none; cursor: pointer; text-align: left;">1.25×</button>
+          <button onclick="setSpeed(1.5)" style="width: 100%; padding: 0.25rem 0.5rem; font-size: 0.875rem; border: none; background: none; cursor: pointer; text-align: left;">1.5×</button>
+          <button onclick="setSpeed(2)" style="width: 100%; padding: 0.25rem 0.5rem; font-size: 0.875rem; border: none; background: none; cursor: pointer; text-align: left;">2×</button>
+        </div>
+        </div>
       </div>
-
-      <div style="font-size: 0.75rem;">
-        Speed: 
-        <select id="speedControl" onchange="changePlaybackSpeed()" style="font-size: 0.75rem; padding: 0.125rem;">
-          <option value="0.75">0.75×</option>
-          <option value="1" selected>1×</option>
-          <option value="1.25">1.25×</option>
-          <option value="1.5">1.5×</option>
-          <option value="2">2×</option>
-        </select>
-      </div>  
   
       <div class="audio-links">
           <a href="#" onclick="setAudio('welcome.mp3', 'Introduction'); return false;">Introduction</a> |
@@ -322,10 +326,26 @@
       document.getElementById('audioText').classList.remove('show');
     }
 
-    function changePlaybackSpeed() {
-      const speed = document.getElementById('speedControl').value;
-      audioPlayer.playbackRate = parseFloat(speed);
+    const speedButton = document.getElementById('speedButton');
+    const speedMenu = document.getElementById('speedMenu');
+    const audioPlayer = document.getElementById('audioPlayer');
+    
+    function toggleSpeedMenu() {
+      speedMenu.style.display = (speedMenu.style.display === 'block') ? 'none' : 'block';
     }
+    
+    function setSpeed(speed) {
+      audioPlayer.playbackRate = speed;
+      speedButton.innerHTML = speed + '<sup style="font-size: 0.6em; vertical-align: middle; margin-left: 0.1rem;">x</sup> ▼';
+      speedMenu.style.display = 'none';
+    }
+    
+    // Close speed menu if clicking outside
+    document.addEventListener('click', (e) => {
+      if (!speedButton.contains(e.target) && !speedMenu.contains(e.target)) {
+        speedMenu.style.display = 'none';
+      }
+    });
 
     // Update progress bar
     audioPlayer.addEventListener('timeupdate', () => {
