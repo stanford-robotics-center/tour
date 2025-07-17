@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,6 +122,20 @@
       margin-bottom: 0.75rem;
     }
 
+    #audioText {
+      opacity: 0;
+      visibility: hidden;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+    }
+    
+    #audioText.show {
+      opacity: 1;
+      visibility: visible;
+      max-height: 2000px; /* enough room for your longest text */
+    }
+    
     .guestbook-link {
       font-size: 0.6875rem;
       font-style: italic;
@@ -190,7 +203,13 @@
           <a href="#" onclick="setAudio('logisticsmanufacturing.mp3', 'Logistics and Manufacturing Bay'); return false;">Logistics and Manufacturing Bay</a>
       </div>
 
-      <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
+    <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
+    
+    <div id="audioText" style="padding: 1rem; border-top: 1px solid #ccc; margin-top: 1rem; font-size: 0.875rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <!-- Loaded text for the current stop will appear here -->
+    </div>
+
+
     
   </section>
 
@@ -274,6 +293,7 @@
     function stopAudio() {
       audioPlayer.pause();
       audioPlayer.currentTime = 0;
+      document.getElementById('audioText').classList.remove('show');
     }
   
     // Update progress bar
@@ -287,12 +307,30 @@
       audioPlayer.currentTime = progressBar.value;
     });
     
-    // Update track label
-    function setAudio(src, label = '') {
+    // Update audio source, audio text, and track label; start audio play
+    async function setAudio(src, label = '') {
       audioPlayer.src = src;
       audioPlayer.play();
-      currentTrackLabel.innerHTML = `${label}`;
-    }    
+      currentTrackLabel.innerHTML = label;
+    
+      const audioTextDiv = document.getElementById('audioText');
+      const textFileName = src.replace('.mp3', '.html');
+    
+      try {
+        const response = await fetch(`${textFileName}`);
+        if (!response.ok) throw new Error('Text not found');
+        const text = await response.text();
+        audioTextDiv.innerHTML = text;
+    
+        // Show the text area
+        audioTextDiv.classList.add('show');
+      } catch (err) {
+        audioTextDiv.innerHTML = '<p><em>Text unavailable for this stop.</em></p>';
+        audioTextDiv.classList.add('show');
+      }
+    }      
+    
+    
   </script>
   
 </body>
