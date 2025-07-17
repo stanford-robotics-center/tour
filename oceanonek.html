@@ -1,146 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stanford Robotics Center: Ocean OneK</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: sans-serif;
-    }
+<p>
+Ocean One is a humanoid robot designed for underwater exploration. It has special features that allow its human pilot to see what the robot sees and feel what the robot feels – while the robot dives to depths that a human cannot handle. In order to accomplish this, the robot has stereoscopic vision, eight thrusters, bimanual arms, and hands that combine force sensors and haptic feedback.
+</p>
 
-    body {
-      position: relative;
-      background-color: black;
-    }
+<p>
+Ocean One’s first journey was to La Lune, 100 meters below the Mediterranean – right at the limits of how deep a human diver can go. La Lune, the flagship of King Louis XIV, sank in 1664. No human had explored its ruins until Ocean One reached it. Controlled by a human pilot who could feel what the robot feels via haptics, Ocean One even recovered a grapefruit-size vase and returned it to the ship deck to much fanfare.
+</p>
 
-    img {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
-      display: block;
-    }
+<p>
+Thanks to improvements in its technology, Ocean One has a new name – Ocean One K – since it can now dive  to 1000 meters (i e “One K”). It has explored a Roman shipwreck from the second century AD at 334 meters deep and also the former Italian passenger liner the Crispi at 500 meters deep. Oussama Khatib, the faculty director for the Stanford Robotics Center, and the visionary behind the Ocean One robot, likes to say that Ocean One K is the first robot that can not only “see”, but can also “do”. A wonderful example of this is that Ocean One K was able to bring back samples from the Crispi shipwreck of a never seen before iron-eating bacteria that is consuming the ship.
+</p>
 
-    /* Audio Player - Top Left */
-    #customAudioPlayer {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      z-index: 1000;
-      width: 260px;
-    }
-
-    #customAudioPlayer .label {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 8px;
-      text-align: left;
-    }
-
-    #customAudioPlayer .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: flex-start;
-    }
-
-    #customAudioPlayer button,
-    #customAudioPlayer select {
-      background: #444;
-      color: white;
-      border: none;
-      padding: 8px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    #customAudioPlayer button:hover,
-    #customAudioPlayer select:hover {
-      background: #666;
-    }
-
-    /* Conversational AI - Bottom Right */
-    #aiWrapper {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    elevenlabs-convai {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Background Image -->
-  <img src="https://khatib.stanford.edu/ocean-one-images/AtStanford/O2-pool.jpg" alt="Stanford Robotics Center Image" />
-
-  <!-- Audio Controls -->
-  <div id="customAudioPlayer">
-    <div class="label">Ocean OneK Audio Information</div>
-    <audio id="audioPlayer" src="oceanonek.mp3"></audio>
-    <div class="controls">
-      <button onclick="playAudio()">▶</button>
-      <button onclick="pauseAudio()">⏸</button>
-      <button onclick="stopAudio()">⏹</button>
-      <button onclick="rewindAudio()">⏪</button>
-      <button onclick="fastForwardAudio()">⏩</button>
-      <select onchange="changeSpeed(this.value)">
-        <option value="0.5">0.5x</option>
-        <option value="1" selected>1x</option>
-        <option value="1.5">1.5x</option>
-        <option value="2">2x</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Conversational AI Widget -->
-  <div id="aiWrapper">
-    <elevenlabs-convai agent-id="agent_01jvn5j7m7emj9mva27qc019fy"></elevenlabs-convai>
-  </div>
-
-  <!-- Widget Script -->
-  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
-
-  <!-- Audio Controls Script -->
-  <script>
-    const audio = document.getElementById("audioPlayer");
-
-    function playAudio() {
-      audio.play();
-    }
-
-    function pauseAudio() {
-      audio.pause();
-    }
-
-    function stopAudio() {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-
-    function rewindAudio() {
-      audio.currentTime = Math.max(0, audio.currentTime - 5);
-    }
-
-    function fastForwardAudio() {
-      audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
-    }
-
-    function changeSpeed(speed) {
-      audio.playbackRate = parseFloat(speed);
-    }
-  </script>
-
-</body>
-</html>
+<p>
+Now, go ahead and enter the Ocean Walk, where you'll see videos that will highlight some of the key Ocean OneK expeditions – plus, you’ll get to meet Ocean OneK itself and you can take a selfie!
+</p>
