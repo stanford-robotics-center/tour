@@ -44,12 +44,30 @@
       color: #333;
       border-bottom: 1px solid #ccc;
     }
-    
+
+    .logo {
+      width: 3rem;
+      height: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      .logo {
+        width: 4rem;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .logo {
+        width: 5rem;
+      }
+    }
+
     .chatbot-note {
       font-size: 0.75rem;
     }
     
     .guestbook-link {
+      text-align: center;
       font-size: 0.6875rem;
       font-style: italic;
       color: #666666;
