@@ -12,72 +12,26 @@
       font-family: sans-serif;
     }
 
-    .chatbot-explainer {
-      margin-top: 400px; /* fallback in case JS doesn't run */
-      max-width: 700px;
-      padding: 1rem;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-      transition: margin-top 0.3s ease;
-    }
-
-    @media (max-width: 600px) {
-      .chatbot-explainer {
-        padding: 1.5rem;
-      }
-    }
-
     .guestbook-link {
-      display: inline-block;
-      margin-top: 1rem;
-      font-weight: bold;
-      text-decoration: none;
-      color: #8c1515;
+      font-size: 0.6875rem;
+      font-style: italic;
+      color: #666666;
+      background: none;
+      border: none;
+      padding: 0.125rem 0.25rem;
+      text-decoration: underline;
+    }
+
+    .guestbook-link:hover {
+      color: #444444;
     }
   </style>
 </head>
 
 <body>
-  <!-- Chatbot widget -->
+
   <elevenlabs-convai agent-id="agent_01k0cpm7ddf0zb2g2d14s6c766"></elevenlabs-convai>
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-  <!-- Explainer content -->
-  <div class="chatbot-explainer">
-    <p>
-      The SRC chatbot has access to a knowledge base of academic articles about Stanford robotics research, so you can ask questions like <em>"What is soft robotics?”</em> or <em>“What are toddler bots?”</em>.
-      You can interact with the chatbot either via audio or via text. If you choose to use audio, it's best to use earbuds with a built-in microphone so that the SRC chatbot hears only you, and is not distracted by other conversation or sounds.
-      Note that the chatbot can understand a wide variety of languages, so you're welcome to ask your questions in the language of your choice. You can also interrupt the chatbot at any time.
-    </p>
-    <a href="https://forms.gle/uHTPHaCvi857ZBQx8" class="guestbook-link">SRC Guestbook</a>
-  </div>
-
-  <!-- JS to dynamically adjust margin based on widget height -->
-  <script>
-    window.addEventListener('load', () => {
-      const explainer = document.querySelector('.chatbot-explainer');
-
-      function adjustMargin() {
-        const widget = document.querySelector('elevenlabs-convai');
-        if (!widget) return;
-        const rect = widget.getBoundingClientRect();
-        explainer.style.marginTop = (rect.bottom + 20) + 'px';
-      }
-
-      // Initial adjustment
-      adjustMargin();
-
-      // Re-adjust on changes to the widget
-      const observer = new MutationObserver(adjustMargin);
-      const widget = document.querySelector('elevenlabs-convai');
-      if (widget) {
-        observer.observe(widget, { childList: true, subtree: true });
-      }
-
-      // Optional: adjust on window resize as well
-      window.addEventListener('resize', adjustMargin);
-    });
-  </script>
 </body>
 </html>
