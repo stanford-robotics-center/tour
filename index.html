@@ -360,7 +360,8 @@
     const audioPlayer = document.getElementById('audioPlayer');
     const progressBar = document.getElementById('progressBar');
     const currentTrackLabel = document.getElementById('currentTrackLabel');
-
+    let currentPlaybackRate = 1;
+    
     function playAudio() {
       audioPlayer.play();
     }
@@ -388,6 +389,7 @@
     }
 
     function setSpeed(speed) {
+      currentPlaybackRate = speed;
       audioPlayer.playbackRate = speed;
       speedButton.innerHTML = speed + '<sup style="font-size: 0.6em; vertical-align: middle; margin-left: 0.1rem;">x</sup> ▼';
       speedMenu.style.display = 'none';
@@ -414,6 +416,7 @@
     // Update audio source, audio text, and track label; start audio play
     async function setAudio(src, label = '') {
       audioPlayer.src = src;
+      audioPlayer.playbackRate = currentPlaybackRate;
       audioPlayer.play();
       currentTrackLabel.innerHTML = label;
 
